@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Prediction</title>
+    <style>
+        /* Body and Background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e, #16a085);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;
+            background-size: cover;
+            background-attachment: fixed;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8); /* Darker shadow for Titanic theme */
+        }
+
+        /* Container for form */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); /* Deep shadow around the form */
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Heading Styles */
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: bold;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.9); /* Strong shadow for heading */
+        }
+
+        /* Label Styles */
+        label {
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Input and Select Styling */
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        select {
+            appearance: none;
+            background-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+        }
+
+        option {
+            background-color: #4a8c99;
+            color: #ffffff;
+        }
+
+        /* Focus state */
+        input:focus, select:focus {
+            background: rgba(255, 255, 255, 0.6);
+            outline: none;
+            border: 2px solid #ff9a8b;
+        }
+
+        /* Button Styles */
+        button {
+            background: linear-gradient(90deg, #2c3e50, #34495e);
+            color: #fff;
+            font-size: 1.4rem;
+            padding: 16px;
+            width: 100%;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #2c3e50, #34495e);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Prediction result styles */
+        #predictionResult {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 14px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Titanic Survival Prediction</h1>
+        <form action="/predict" method="POST">
+            <label for="Pclass">Pclass (1st, 2nd, or 3rd Class):</label>
+            <input type="number" name="Pclass" id="Pclass" required min="1" max="3">
+
+            <label for="Age">Age:</label>
+            <input type="number" name="Age" id="Age" required min="0">
+
+            <label for="SibSp">Siblings/Spouses Aboard:</label>
+            <input type="number" name="SibSp" id="SibSp" required min="0">
+
+            <label for="Parch">Parents/Children Aboard:</label>
+            <input type="number" name="Parch" id="Parch" required min="0">
+
+            <label for="Fare">Fare Paid:</label>
+            <input type="number" name="Fare" id="Fare" required min="0">
+
+            <label for="Sex">Gender:</label>
+            <select id="Sex" name="Sex" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <label for="Embarked">Embarkation Port:</label>
+            <select id="Embarked" name="Embarked" required>
+                <option value="">Select Port</option>
+                <option value="C">Cherbourg</option>
+                <option value="Q">Queenstown</option>
+                <option value="S">Southampton</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Prediction Result is displayed here, rendered server-side -->
+        {% if prediction_text %}
+            <div id="predictionResult">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
