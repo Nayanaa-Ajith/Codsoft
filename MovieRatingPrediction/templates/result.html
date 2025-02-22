@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif; /* System font */
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Result Container Styling */
+        .result-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            width: 350px;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Prediction Result Text */
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Strong Text for Rating */
+        strong {
+            font-size: 20px;
+            color: #ff4b2b; /* Highlighting the rating */
+        }
+
+        /* Link Styling */
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #ff4b2b;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ff3b1f;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Predicted Movie Rating ⭐</h1>
+        <p>The predicted rating is: <strong>{{ rating }}</strong></p>
+        <a href="/">Predict Another</a>
+    </div>
+</body>
+</html>

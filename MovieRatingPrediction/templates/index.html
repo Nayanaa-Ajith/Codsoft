@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Rating Prediction</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Labels */
+        label {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Select Fields */
+        select {
+            padding: 8px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #1e3c72;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        button {
+            background: #ff4b2b;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #ff3b1f;
+            transform: scale(1.05);
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            const genre = document.forms["predictionForm"]["genre"].value;
+            const director = document.forms["predictionForm"]["director"].value;
+            const actors = document.forms["predictionForm"]["actors"].value;
+
+            if (genre == "" || director == "" || actors == "") {
+                alert("Please select all fields!");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Movie Rating Prediction</h1>
+        <form name="predictionForm" action="/predict" method="post" onsubmit="return validateForm()">
+            <label for="genre">Genre:</label>
+            <select name="genre">
+                <option value="" disabled selected>Select Genre</option>
+                {% for genre in genre_list %}
+                    <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="director">Director:</label>
+            <select name="director">
+                <option value="" disabled selected>Select Director</option>
+                {% for director in director_list %}
+                    <option value="{{ director }}">{{ director }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="actors">Actors:</label>
+            <select name="actors">
+                <option value="" disabled selected>Select Actor</option>
+                {% for actor in actor_list %}
+                    <option value="{{ actor }}">{{ actor }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">🎥 Predict</button>
+        </form>
+    </div>
+</body>
+</html>
